@@ -1,24 +1,28 @@
-function doGet(e) {
-  var email = e.parameter.email;
-  var webhook = "https://hook.eu2.make.com/sh5ngtzmtrpf6g51lpuup1gpxeso4lhj";
-  var loomLink = "https://www.loom.com/share/865e96e237ed4635a9686b27d0e09cbb?sid=056e4df0-d4d4-4ad8-8752-c2a85ce7e6d3";
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get("email");
+    const webhook = "https://hook.eu2.make.com/sh5ngtzmtrpf6g51lpuup1gpxeso4lhj";
+    const loom = "https://www.loom.com/share/865e96e237ed4635a9686b27d0e09cbb?sid=056e4df0-d4d4-4ad8-8752-c2a85ce7e6d3";
 
-  // Send webhook if email is present
-  if (email) {
-    UrlFetchApp.fetch(webhook + "?email=" + encodeURIComponent(email));
-  }
-
-  // Redirect using HTML output
-  var html = `
-    <html>
-      <head>
-        <meta http-equiv="refresh" content="0; url=${loomLink}">
-      </head>
-      <body>
-        <p>Redirecting to your video...</p>
-      </body>
-    </html>
-  `;
-
-  return HtmlService.createHtmlOutput(html);
-}
+    if (email) {
+      fetch(${webhook}?email=${encodeURIComponent(email)})
+        .then(() => {
+          window.location.href = loom;
+        })
+        .catch(() => {
+          window.location.href = loom;
+        });
+    } else {
+      window.location.href = loom;
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting to your video...</p>
+</body>
+</html>
