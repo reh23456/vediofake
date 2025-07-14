@@ -4,22 +4,17 @@
   <meta charset="UTF-8">
   <title>Redirecting...</title>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const email = params.get("email");
     const webhook = "https://hook.eu2.make.com/sh5ngtzmtrpf6g51lpuup1gpxeso4lhj";
     const loom = "https://www.loom.com/share/865e96e237ed4635a9686b27d0e09cbb?sid=056e4df0-d4d4-4ad8-8752-c2a85ce7e6d3";
 
-    if (email) {
-      fetch(${webhook}?email=${encodeURIComponent(email)})
-        .then(() => {
-          window.location.href = loom;
-        })
-        .catch(() => {
-          window.location.href = loom;
-        });
-    } else {
-      window.location.href = loom;
-    }
+    // Trigger Make webhook without needing email
+    fetch(webhook)
+      .then(() => {
+        window.location.href = loom;
+      })
+      .catch(() => {
+        window.location.href = loom;
+      });
   </script>
 </head>
 <body>
